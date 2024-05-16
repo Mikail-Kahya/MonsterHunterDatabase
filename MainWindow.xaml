@@ -6,7 +6,64 @@
         xmlns:local="clr-namespace:MonsterHunter"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <SolidColorBrush x:Key="BorderBrush" Color="#656565"/>
+        <SolidColorBrush x:Key="BackgroundBrush" Color="#1d1d1d"/>
+        <Style TargetType="TextBlock"  x:Key="Title" >
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Foreground" Value="{StaticResource TitleBrush}"/>
+        </Style>
+        <Style TargetType="TextBlock"  x:Key="Number" >
+            <Setter Property="FontSize" Value="26"/>
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style TargetType="TextBlock"  x:Key="Rank" >
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Padding" Value="0, 6"/>
+        </Style>
+        <Style TargetType="Rectangle"  x:Key="Underline" >
+            <Setter Property="Fill" Value="{StaticResource AgentBrush}"/>
+            <Setter Property="Height" Value="2"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="0 2 0 0"/>
+        </Style>
+    </Window.Resources>
     <Grid>
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="80*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="20*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- SideScrollView for monster list -->
+        <ListBox x:Name="lstSide" 
+                 Grid.Column="0" Grid.Row="1"
+                 HorizontalContentAlignment="Stretch">
+            <Border Background="{StaticResource BackgroundBrush}" Padding="2"
+                    BorderThickness="1"
+                    BorderBrush="{StaticResource BorderBrush}">
+                <DockPanel>
+                    <Image Source="resources/images/UI/BoxCorner.png" 
+                           Width="20" VerticalAlignment="Top"/>
+                    <Image Source="resources/images/monsters/100.png" 
+                           Width="50"/>
+                    <Image Source="resources/images/UI/BoxCorner.png" 
+                           Width="20" VerticalAlignment="Bottom"
+                           RenderTransformOrigin="0.5, 0.5">
+                        <Image.RenderTransform>
+                            <ScaleTransform ScaleX="-1" ScaleY="-1"/>
+                        </Image.RenderTransform>
+                    </Image>
+                </DockPanel>
+            </Border>
+        </ListBox>
     </Grid>
 </Window>
