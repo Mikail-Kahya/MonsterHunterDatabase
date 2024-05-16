@@ -2,12 +2,15 @@ namespace MonsterHunter.LIB.model
 {
     public class BaseMonster
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public string type { get; set; }
         public string species { get; set; }
         public string[] elements { get; set; }
         public string name { get; set; }
         public string description { get; set; }
+
+        public string ImageUrl => "resources/images/monsters/" + Id.ToString() + ".png";
+
         public Ailment[] ailments { get; set; }
         public Location[] locations { get; set; }
         public Resistance[] resistances { get; set; }

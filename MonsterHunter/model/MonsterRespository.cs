@@ -13,15 +13,15 @@ namespace MonsterHunter.model
     public class MonsterRespository
     {
         private List<BaseMonster> _Monsters = new List<BaseMonster>();
+        public List<BaseMonster> Monsters => _Monsters;
 
         private void LoadMonsters(string jsonFile)
         {
-            JObject json = JObject.Parse(GetJsonString(jsonFile));
-            foreach (var cardJson in json.SelectToken("cards").Children())
+            string jsonstring = GetJsonString(jsonFile);
+            JObject json = JObject.Parse(jsonstring);
+            foreach (var cardJson in json.SelectToken("monsters").Children())
             {
-                int id = cardJson.SelectToken("cardTypeId").Value<int>();
-                Type type = GetCardType(id).ActualType;
-                _Cards.Add((BaseCard)cardJson.ToObject(type));
+                _Monsters.Add(cardJson.ToObject<BaseMonster>());
             }
         }
 

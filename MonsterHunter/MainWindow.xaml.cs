@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MonsterHunter.model;
 
 namespace MonsterHunter
 {
@@ -19,6 +20,9 @@ namespace MonsterHunter
         public MainWindow()
         {
             InitializeComponent();
+
+            MonsterRespository repo = new MonsterRespository("resources/dataFiles/monsters.json");
+            lstSide.ItemsSource = repo.Monsters;
         }
     }
 }
