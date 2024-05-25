@@ -44,13 +44,18 @@ namespace MonsterHunter.ViewModel
             {
                 _selectedType = value;
                 Monsters = _repo.GetAllPokemon(_selectedType);
+                OnPropertyChanged(nameof(SelectedType));
             }
         }
 
         public Monster SelectedMonster
         {
             get => _selectedMonster;
-            set => _selectedMonster = value;
+            set
+            {
+                _selectedMonster = value;
+                OnPropertyChanged(nameof(SelectedMonster));
+            }
         }
 
         public OverViewPageVM()
