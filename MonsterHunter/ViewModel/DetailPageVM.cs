@@ -14,7 +14,8 @@ namespace MonsterHunter.ViewModel
         {
             Id = 2,
             Name = "Anjanath",
-            Type = "Large wyvern",
+            Type = "Large",
+            Species = "Brute Wyvern"
         };
 
         public Monster Monster

@@ -19,7 +19,19 @@
         <convert:TypeToImageConverter x:Key="TypeImage"/>
         <convert:UrlToImageConverter x:Key="MonsterImg"/>
     </Page.Resources>
-    <Grid>
+    <Grid Background="GhostWhite">
+        <Grid.Resources>
+            <Style x:Key="InvertedImg" TargetType="Image">
+                <Setter Property="ScaleTransform.ScaleX" Value="-1"/>
+                <Setter Property="ScaleTransform.ScaleY" Value="-1"/>
+                <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>
+                <Setter Property="VerticalAlignment" Value="Bottom"/>
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+            </Style>
+            <SolidColorBrush x:Key="Background" Color="#222"/>
+            <SolidColorBrush x:Key="Border" Color="#111"/>
+        </Grid.Resources>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="0.7*"/>
@@ -32,41 +44,48 @@
 
         <!--Background-->
         <Image Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="2"
-               Source="/Resources/Img/UI/bg.jpg" Stretch="UniformToFill"/>
+               Source="/Resources/Img/UI/bg.jpg" Stretch="UniformToFill" Opacity="0.8"/>
 
         <!--Top info-->
         <StackPanel Grid.Row="0" Grid.Column="1" 
                     Margin="10, 0, 0, 0"
                     VerticalAlignment="Bottom">
             <TextBlock Text="{Binding Monster.Name, FallbackValue=Jagras}" FontSize="35"/>
-            <TextBlock Text="{Binding Monster.Type, FallbackValue=Small}" FontSize="15"/>
+            <DockPanel>
+                <TextBlock Text="{Binding Monster.Type, FallbackValue=Small}" FontSize="15"/>
+                <TextBlock Text="{Binding Monster.Species, FallbackValue=FangedWyvern}" FontSize="15"
+                           Margin="5 0 0 0"/>
+            </DockPanel>
+            
         </StackPanel>
         
 
         <!--Image -->
-        <DockPanel Grid.Column="0" Grid.Row="0"
-                   Margin="5"
-                   Background="#222">
-            <Image Source="/Resources/Img/UI/BoxCorner.png" 
-                   Width="40" VerticalAlignment="Top"/>
-            <Image Source="{Binding Monster.Name, Converter={StaticResource MonsterImg}, FallbackValue=/Resources/Img/monsters/2.png}" Width="110"/>
-            <Image Source="/Resources/Img/UI/BoxCorner.png" Width="40" 
-                   VerticalAlignment="Bottom" HorizontalAlignment="Right"
-                   RenderTransformOrigin="0.5, 0.5">
-                    <Image.RenderTransform>
-                        <ScaleTransform ScaleX="-1" ScaleY="-1"/>
-                    </Image.RenderTransform>
-            </Image>
-        </DockPanel>
-        
+        <Border Grid.Column="0" Grid.Row="0"
+                Margin="3" BorderThickness="2"
+                BorderBrush="{StaticResource Border}">
+            <DockPanel Background="{StaticResource Background}">
+                <Image Source="/Resources/Img/UI/BoxCorner.png" 
+                       Width="40" VerticalAlignment="Top"/>
+                <Image Source="{Binding Monster.Name, Converter={StaticResource MonsterImg}, FallbackValue=/Resources/Img/monsters/2.png}" Width="110"/>
+                <Image Source="/Resources/Img/UI/BoxCorner.png" Width="40" 
+                       Style="{StaticResource InvertedImg}">
+                        <Image.RenderTransform>
+                            <ScaleTransform ScaleX="-1" ScaleY="-1"/>
+                        </Image.RenderTransform>
+                </Image>
+            </DockPanel>
+        </Border>
 
-        <!--Bottom border-->
+
+            <!--Bottom border-->
         <Rectangle  Grid.Row="1" Grid.ColumnSpan="2"
                     Height="2"
                     Fill="#524426" />
 
 
-        <Grid Grid.Row="3" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="23,0,23,-0.4" Height="285" VerticalAlignment="Bottom">
+        <!--Info-->
+        <Grid Grid.Column="1" Grid.Row="2">
             <Grid.Resources>
                 <Style TargetType="TextBlock">
                     <Setter Property="Foreground" Value="Black"/>
@@ -74,52 +93,48 @@
                 </Style>
             </Grid.Resources>
             <Grid.RowDefinitions>
-                <RowDefinition Height="2*" />
-                <RowDefinition  Height="0.5*"  />
                 <RowDefinition/>
-                <RowDefinition />
+                <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
+                <ColumnDefinition Width="0.7*"/>
+                <ColumnDefinition Width="0.5*"/>
             </Grid.ColumnDefinitions>
-            <!--Name of the pokemon-->
 
-            <Rectangle Grid.Row="2" Grid.RowSpan="2" HorizontalAlignment="Right"
-                       Fill="#555" Width="1" Margin="0,30,0,50"/>
-            <Rectangle Grid.Row="2" Grid.RowSpan="2" HorizontalAlignment="Right"
-                       Fill="#555" Width="1" Margin="0,30,0,50" Grid.Column="1"/>
+            <!--Description-->
+            <Border Grid.Column="0" Grid.Row="0"
+                    Margin="5" BorderThickness="2"
+                    BorderBrush="{StaticResource Border}">
+            <Grid Background="#55552211">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.15*"/>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="0.15*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.05*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="0.05*"/>
+                </Grid.ColumnDefinitions>
 
-            <!--Actual type of the pokemon-->
-            <TextBlock Text="{Binding Monster.Type, FallbackValue=Ground}" FontSize="21" Grid.Row="2" VerticalAlignment="Center" />
-
-            <!--(fixed text, no binding)-->
-            <TextBlock Text="Type" FontSize="13" Grid.Row="3" VerticalAlignment="Top"/>
-
-
-            <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" >
-                <!--Actual weight of the pokemon-->
-                <TextBlock Text="{Binding Monster.Weight, FallbackValue=5}"  FontSize="21" />
-                <TextBlock Text=" kg" FontSize="21" />
-            </StackPanel>
-
-            <!--(fixed text, no binding)-->
-            <TextBlock Text="Weight"  Grid.Column="1" FontSize="13" Grid.Row="3" VerticalAlignment="Top"/>
-
-
-            <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" >
-                <!--Actual size of the pokemon-->
-                <TextBlock Text="{Binding Monster.Height, FallbackValue=36}"  FontSize="21" />
-                <TextBlock Text=" cm" FontSize="21" />
-            </StackPanel>
-
-            <!--(fixed text, no binding)-->
-            <TextBlock Text="Height"  Grid.Column="2" FontSize="13" Grid.Row="3" VerticalAlignment="Top"/>
-
-            <Rectangle Fill="#555" Grid.Column="0" Grid.Row="1"
-                       HorizontalAlignment="Right" Width="2" Margin="0,50,0,30" />
+                <!--Corner images-->
+                <Image Grid.Column="0" Grid.Row="0" 
+                       Source="/Resources/Img/UI/BoxCorner.png" 
+                       Width="40" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <Image Grid.Column="2" Grid.Row="2" 
+                       Source="/Resources/Img/UI/BoxCorner.png" Width="40" 
+                       Style="{StaticResource InvertedImg}">
+                    <Image.RenderTransform>
+                        <ScaleTransform ScaleX="-1" ScaleY="-1"/>
+                    </Image.RenderTransform>
+                </Image>
+                <TextBlock Grid.Column="1" Grid.Row="1"
+                           Text="{Binding Monster.Description, FallbackValue=NoDescription}"
+                           TextAlignment="Left"
+                           TextWrapping="WrapWithOverflow"
+                           TextTrimming="WordEllipsis"/>
+            </Grid>
+            </Border>
         </Grid>
-      
     </Grid>
 </Page>
