@@ -14,7 +14,7 @@
     </Page.DataContext>
 
     <Page.Resources>
-        <convert:TypeToIconConverter x:Key="TypeUrl"/>
+        <convert:UrlToImageConverter x:Key="Img"/>
     </Page.Resources>
 
     <Grid>
@@ -34,9 +34,9 @@
                     <StackPanel Orientation="Horizontal">
                         <!-- should contain type icon image when binding -->
                         <Image Height="20" Width="20" Margin="4"
-                               Source="{Binding Id, Converter={StaticResource TypeUrl}}"/>
+                               Source="{Binding Name, Converter={StaticResource Img}}"/>
                         <!-- binding needed -->
-                        <TextBlock Text="{Binding Name, FallbackValue=(PokemonName)}" Margin="10,0" Foreground="White" VerticalAlignment="Center" FontSize="21"/>
+                        <TextBlock Text="{Binding Name, FallbackValue=(MonsterName)}" Margin="10,0" Foreground="White" VerticalAlignment="Center" FontSize="21"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
