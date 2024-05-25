@@ -12,7 +12,7 @@ namespace MonsterHunter.ViewModel
     {
         private Monster _monster = new Monster()
         {
-            Id = 136,
+            Id = 2,
             Name = "Anjanath",
             Type = "Large wyvern",
         };

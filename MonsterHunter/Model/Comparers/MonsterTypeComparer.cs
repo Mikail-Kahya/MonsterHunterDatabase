@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using MonsterHunter.Model;
 namespace MonsterHunter.Model.Comparers
 {
-    class PokemonTypeComparer : IEqualityComparer<Monster>
+    class MonsterTypeComparer : IEqualityComparer<Monster>
     {
         public bool Equals(Monster? x, Monster? y)
         {

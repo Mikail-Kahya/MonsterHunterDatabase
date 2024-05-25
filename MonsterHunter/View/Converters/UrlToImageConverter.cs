@@ -13,9 +13,7 @@ namespace MonsterHunter.View.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string imageUrl = value.ToString();
-            BitmapImage result = new BitmapImage(new Uri($"http://static.pokemonpets.com/images/monsters-images-800-800/{imageUrl}.png", UriKind.Absolute));
-            return result;
+            return new BitmapImage(new Uri($"pack://application:,,,/Resources/Img/monsters/{value}.png"));
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

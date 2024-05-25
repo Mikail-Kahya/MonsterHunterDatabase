@@ -13,7 +13,7 @@ namespace MonsterHunter.ViewModel
 {
     internal class MainViewModel : ObservableObject
     {
-        private Page _currentPage = new OverViewPage();
+        private Page _currentPage;
         private string _commandText = "SHOW DETAILS";
 
         public string CommandText
@@ -43,7 +43,26 @@ namespace MonsterHunter.ViewModel
 
         public MainViewModel()
         {
+            _currentPage = MainPage;
             SwitchPageCommand = new RelayCommand(SwitchPage);
+            OverViewPageVM? overViewVM = CurrentPage.DataContext as OverViewPageVM;
+            overViewVM.PropertyChanged += OverViewVM_PropertyChanged;
+        }
+
+        private void OverViewVM_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            //Get the selected monster
+            OverViewPageVM? overViewVM = MainPage.DataContext as OverViewPageVM;
+            Monster selectedMonster = overViewVM?.SelectedMonster;
+
+            if (selectedMonster == null)
+                return;
+
+            DetailPageVM? detailVM = PokePage.DataContext as DetailPageVM;
+            detailVM.Monster = selectedMonster;
+
+            CurrentPage = PokePage;
+            CommandText = "GO BACK";
         }
 
         private void SwitchPage()
@@ -51,7 +70,6 @@ namespace MonsterHunter.ViewModel
             //check the current visible page type
             if (CurrentPage is OverViewPage) //overview page -> go to details page
             {
-                MainPage = CurrentPage as OverViewPage;
                 //Get the selected pokemon
                 OverViewPageVM? overViewVM = MainPage.DataContext as OverViewPageVM;
                 Monster selectedMonster = overViewVM?.SelectedMonster;
