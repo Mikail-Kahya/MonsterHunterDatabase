@@ -16,10 +16,12 @@ namespace MonsterHunter.Repository
     {
         private List<Monster> _monsters = new List<Monster>();
         private List<string> _types = new List<string>();
+        private List<string> _elements = new List<string>();
         public List<Monster> Monsters => _monsters;
         public List<string> Types => _types;
+        public List<string> Elements => _elements;
 
-        public List<Monster> GetAllPokemon(string type)
+        public List<Monster> GetAllMonsters(string type)
         {
             List<Monster> monsterList = new List<Monster>();
             foreach (var monster in _monsters)
@@ -35,12 +37,23 @@ namespace MonsterHunter.Repository
         {
             _monsters = JsonConvert.DeserializeObject<List<Monster>>(GetJsonString(jsonFile));
             GetUniqueTypes();
+            GetUniqueElements();
         }
 
         private void GetUniqueTypes()
         {
             foreach (Monster uniqueMonster in _monsters.DistinctBy(monster => monster.Type))
                 _types.Add(uniqueMonster.Type);
+        }
+
+        private void GetUniqueElements()
+        {
+            foreach (Monster monster in Monsters)
+            {
+                foreach (string element in monster.Elements)
+                    if(!_elements.Contains(element))
+                        _elements.Add(element);
+            }
         }
 
         private string? GetJsonString(string file)

@@ -10,6 +10,8 @@
 
   <ItemGroup>
     <None Remove="Resources\Data\monsters.json" />
+    <None Remove="Resources\Font\VTCGoblinHand.ttf" />
+    <None Remove="Resources\Font\VTCGoblinHandBold.ttf" />
     <None Remove="Resources\Img\monsters\1.png" />
     <None Remove="Resources\Img\monsters\100.png" />
     <None Remove="Resources\Img\monsters\101.png" />
@@ -99,6 +101,7 @@
     <None Remove="Resources\Img\monsters\Zorah-Magdaros.png" />
     <None Remove="Resources\Img\UI\bg.jpg" />
     <None Remove="Resources\Img\UI\BoxCorner.png" />
+    <None Remove="Resources\Img\UI\Star.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -111,6 +114,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Font\VTCGoblinHand.ttf" />
+    <Resource Include="Resources\Font\VTCGoblinHandBold.ttf" />
     <Resource Include="Resources\Img\monsters\aptonoth.png" />
     <Resource Include="Resources\Img\monsters\kelbi.png" />
     <Resource Include="Resources\Img\monsters\100.png" />
@@ -200,6 +205,7 @@
     <Resource Include="Resources\Img\monsters\gajau.png" />
     <Resource Include="Resources\Img\UI\bg.jpg" />
     <Resource Include="Resources\Img\UI\BoxCorner.png" />
+    <Resource Include="Resources\Img\UI\Star.png" />
   </ItemGroup>
 
 </Project>

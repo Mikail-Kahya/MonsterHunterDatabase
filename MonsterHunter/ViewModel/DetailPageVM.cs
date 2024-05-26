@@ -18,6 +18,8 @@ namespace MonsterHunter.ViewModel
             Species = "Brute Wyvern"
         };
 
+        private List<string> _elements = new List<string>(); 
+
         public Monster Monster
         {
             get => _monster;
@@ -25,6 +27,16 @@ namespace MonsterHunter.ViewModel
             {
                 _monster = value;
                 OnPropertyChanged(nameof(Monster));
+            }
+        }
+
+        public List<string> Elements
+        {
+            get => _elements;
+            set
+            {
+                _elements = value;
+                OnPropertyChanged(nameof(Elements));
             }
         }
     }

@@ -16,7 +16,7 @@ namespace MonsterHunter.View.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
-                return new BitmapImage(new Uri("https://www.clipartmax.com/png/small/129-1298272_free-icons-png-pokemon-ball-no-background.png"));
+                return new BitmapImage(new Uri("pack://application:,,,/Resources/Img/monsters/Jagras.png"));
 
             int type = int.Parse(value.ToString());
             return new BitmapImage(new Uri($"pack://application:,,,/Resources/Img/monsters/{type}.png"));

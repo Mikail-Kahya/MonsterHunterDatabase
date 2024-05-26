@@ -15,6 +15,7 @@ namespace MonsterHunter.ViewModel
         private string _selectedType = "";
         private Monster _selectedMonster;
         private List<string> _monsterTypes;
+        private List<string> _elements;
         private List<Monster> _monsters;
 
         public List<string> MonsterTypes
@@ -24,6 +25,16 @@ namespace MonsterHunter.ViewModel
             {
                 _monsterTypes = value;
                 OnPropertyChanged(nameof(MonsterTypes));
+            }
+        }
+
+        public List<string> Elements
+        {
+            get => _elements;
+            private set
+            {
+                _elements = value;
+                OnPropertyChanged(nameof(Elements));
             }
         }
 
@@ -43,7 +54,7 @@ namespace MonsterHunter.ViewModel
             set
             {
                 _selectedType = value;
-                Monsters = _repo.GetAllPokemon(_selectedType);
+                Monsters = _repo.GetAllMonsters(_selectedType);
                 OnPropertyChanged(nameof(SelectedType));
             }
         }
@@ -62,6 +73,7 @@ namespace MonsterHunter.ViewModel
         {
             MonsterTypes = _repo.Types;
             Monsters = _repo.Monsters;
+            Elements = _repo.Elements;
         }
     }
 }

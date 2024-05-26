@@ -60,6 +60,7 @@ namespace MonsterHunter.ViewModel
 
             DetailPageVM? detailVM = PokePage.DataContext as DetailPageVM;
             detailVM.Monster = selectedMonster;
+            detailVM.Elements = overViewVM.Elements;
 
             CurrentPage = PokePage;
             CommandText = "GO BACK";
