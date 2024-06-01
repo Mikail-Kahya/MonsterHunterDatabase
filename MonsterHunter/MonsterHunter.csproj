@@ -12,6 +12,16 @@
     <None Remove="Resources\Data\monsters.json" />
     <None Remove="Resources\Font\VTCGoblinHand.ttf" />
     <None Remove="Resources\Font\VTCGoblinHandBold.ttf" />
+    <None Remove="Resources\Img\elements\blast.png" />
+    <None Remove="Resources\Img\elements\dragon.png" />
+    <None Remove="Resources\Img\elements\fire.png" />
+    <None Remove="Resources\Img\elements\ice.png" />
+    <None Remove="Resources\Img\elements\paralysis.png" />
+    <None Remove="Resources\Img\elements\poison.png" />
+    <None Remove="Resources\Img\elements\sleep.png" />
+    <None Remove="Resources\Img\elements\stun.png" />
+    <None Remove="Resources\Img\elements\thunder.png" />
+    <None Remove="Resources\Img\elements\water.png" />
     <None Remove="Resources\Img\monsters\1.png" />
     <None Remove="Resources\Img\monsters\100.png" />
     <None Remove="Resources\Img\monsters\101.png" />
@@ -116,6 +126,16 @@
   <ItemGroup>
     <Resource Include="Resources\Font\VTCGoblinHand.ttf" />
     <Resource Include="Resources\Font\VTCGoblinHandBold.ttf" />
+    <Resource Include="Resources\Img\elements\blast.png" />
+    <Resource Include="Resources\Img\elements\dragon.png" />
+    <Resource Include="Resources\Img\elements\fire.png" />
+    <Resource Include="Resources\Img\elements\ice.png" />
+    <Resource Include="Resources\Img\elements\paralysis.png" />
+    <Resource Include="Resources\Img\elements\poison.png" />
+    <Resource Include="Resources\Img\elements\sleep.png" />
+    <Resource Include="Resources\Img\elements\stun.png" />
+    <Resource Include="Resources\Img\elements\thunder.png" />
+    <Resource Include="Resources\Img\elements\water.png" />
     <Resource Include="Resources\Img\monsters\aptonoth.png" />
     <Resource Include="Resources\Img\monsters\kelbi.png" />
     <Resource Include="Resources\Img\monsters\100.png" />

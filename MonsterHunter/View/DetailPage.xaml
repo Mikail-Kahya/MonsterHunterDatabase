@@ -16,7 +16,7 @@
     </Page.DataContext>
 
     <Page.Resources>
-        <convert:TypeToImageConverter x:Key="TypeImage"/>
+        <convert:ElementToImageConverter x:Key="ElementImg"/>
         <convert:UrlToImageConverter x:Key="MonsterImg"/>
     </Page.Resources>
     <Grid Background="GhostWhite">
@@ -63,7 +63,8 @@
         <StackPanel Grid.Row="0" Grid.Column="1" 
                     Margin="10, 0, 0, 0"
                     VerticalAlignment="Bottom">
-            <TextBlock Text="{Binding Monster.Name, FallbackValue=Jagras}" FontSize="35"/>
+            <TextBlock Text="{Binding Monster.Name, FallbackValue=Jagras}"
+                       Style="{StaticResource MonsterFont}" FontSize="35"/>
             <DockPanel>
                 <TextBlock Text="{Binding Monster.Type, FallbackValue=Small}" FontSize="15"/>
                 <TextBlock Text="{Binding Monster.Species, FallbackValue=FangedWyvern}" FontSize="15"
@@ -156,20 +157,23 @@
                                Style="{StaticResource MonsterFont}"
                                HorizontalAlignment="Center"/>
                     <ItemsControl ItemsSource="{Binding Monster.Resistances}" 
-                                  Margin="5" HorizontalAlignment="Left">
-                        <ItemsControl.ItemTemplate>
+                                  Margin="5" HorizontalAlignment="Center" 
+                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                            <!-- Wrapping logic -->
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <DockPanel>
-                                    <TextBlock Text="{Binding Element}" VerticalAlignment="Center"/>
-                                    <Image Source="/Resources/Img/UI/Star.png" Height="20"/>
-                                    <TextBlock Text="{Binding}" VerticalAlignment="Center"/>
-                                </DockPanel>
+                                <StackPanel>
+                                    <Image Source="{Binding Element, Converter={StaticResource ElementImg}, FallbackValue=/Resources/Img/element/fire.png}" Height="20"/>
+                                </StackPanel>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </StackPanel>
-
-                
             </Border>
         </Grid>
     </Grid>
