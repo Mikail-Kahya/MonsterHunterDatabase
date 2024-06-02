@@ -18,6 +18,7 @@
     <Page.Resources>
         <convert:ElementToImageConverter x:Key="ElementImg"/>
         <convert:UrlToImageConverter x:Key="MonsterImg"/>
+        <convert:StarsConverter x:Key="StarsRow"/>
     </Page.Resources>
     <Grid Background="GhostWhite">
         <Grid.Resources>
@@ -170,6 +171,43 @@
                                 <StackPanel>
                                     <Image Source="{Binding Element, Converter={StaticResource ElementImg}, FallbackValue=/Resources/Img/element/fire.png}" Height="20"/>
                                 </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+
+            <!--Weaknesses-->
+            <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"
+                    Style="{StaticResource InfoBorder}">
+                <StackPanel Margin="5">
+                    <TextBlock Text="Weaknesses" 
+                               Style="{StaticResource MonsterFont}"
+                               HorizontalAlignment="Center"/>
+                    <ItemsControl ItemsSource="{Binding Monster.Weaknesses}" 
+                                  Margin="5" HorizontalAlignment="left">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <DockPanel>
+                                    <Image Source="{Binding Element, Converter={StaticResource ElementImg}, FallbackValue=/Resources/Img/elements/fire.png}" Height="20"/>
+
+                                    <!--Stars-->
+                                    <ItemsControl ItemsSource="{Binding Stars, Converter={StaticResource StarsRow}, FallbackValue=/Resources/Img/UI/Star.png}" 
+                                                  Margin="5" HorizontalAlignment="left" 
+                                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                        <!-- Wrapping logic -->
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel Orientation="Horizontal"/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Image Source="{Binding}" Width="20"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </DockPanel>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
