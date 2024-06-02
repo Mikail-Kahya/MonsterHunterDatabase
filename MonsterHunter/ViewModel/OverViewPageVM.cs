@@ -11,7 +11,7 @@ namespace MonsterHunter.ViewModel
 {
     public class OverViewPageVM : ObservableObject
     {
-        private MonsterRepository _repo = new MonsterRepository("Resources/Data/monsters.json");
+        private MonsterRepository _repo = new MonsterRepository();
         private string _selectedType = "";
         private Monster _selectedMonster;
         private List<string> _monsterTypes;
@@ -71,9 +71,13 @@ namespace MonsterHunter.ViewModel
 
         public OverViewPageVM()
         {
-            MonsterTypes = _repo.Types;
-            Monsters = _repo.Monsters;
-            Elements = _repo.Elements;
+            _repo.SetupRepo("https://mhw-db.com/monsters", "Resources/Data/monsters.json").GetAwaiter().OnCompleted(
+                () =>
+                {
+                    MonsterTypes = _repo.Types;
+                    Monsters = _repo.Monsters;
+                    Elements = _repo.Elements;
+                });
         }
     }
 }

@@ -21,7 +21,15 @@ namespace MonsterHunter.View.Converters
 
             string name = value.ToString();
             name= name.Replace(" ", "-").ToLower();
-            return new BitmapImage(new Uri($"pack://application:,,,/Resources/Img/monsters/{name}.png"));
+            try
+            {
+                return new BitmapImage(new Uri($"pack://application:,,,/Resources/Img/monsters/{name}.png"));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return new BitmapImage(new Uri("pack://application:,,,/Resources/Img/monsters/Anjanath.png"));
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

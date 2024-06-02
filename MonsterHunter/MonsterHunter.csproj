@@ -22,7 +22,6 @@
     <None Remove="Resources\Img\elements\stun.png" />
     <None Remove="Resources\Img\elements\thunder.png" />
     <None Remove="Resources\Img\elements\water.png" />
-    <None Remove="Resources\Img\monsters\1.png" />
     <None Remove="Resources\Img\monsters\100.png" />
     <None Remove="Resources\Img\monsters\101.png" />
     <None Remove="Resources\Img\monsters\102.png" />
@@ -82,6 +81,7 @@
     <None Remove="Resources\Img\monsters\Legiana.png" />
     <None Remove="Resources\Img\monsters\Leshen.png" />
     <None Remove="Resources\Img\monsters\Lunastra.png" />
+    <None Remove="Resources\Img\monsters\mernos.png" />
     <None Remove="Resources\Img\monsters\Mosswine.png" />
     <None Remove="Resources\Img\monsters\Namielle.png" />
     <None Remove="Resources\Img\monsters\nergigante.png" />
@@ -221,7 +221,7 @@
     <Resource Include="Resources\Img\monsters\ancient-leshen.png" />
     <Resource Include="Resources\Img\monsters\apceros.png" />
     <Resource Include="Resources\Img\monsters\kestodon.png" />
-    <Resource Include="Resources\Img\monsters\1.png" />
+    <Resource Include="Resources\Img\monsters\mernos.png" />
     <Resource Include="Resources\Img\monsters\gajau.png" />
     <Resource Include="Resources\Img\UI\bg.jpg" />
     <Resource Include="Resources\Img\UI\BoxCorner.png" />

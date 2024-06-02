@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using MonsterHunter.Model;
@@ -26,24 +27,24 @@ namespace MonsterHunter.Repository
             List<Monster> monsterList = new List<Monster>();
             foreach (var monster in _monsters)
             {
-                if (monster.Type == type)
+                if (monster.Species == type)
                     monsterList.Add(monster);
             }
 
             return monsterList;
         }
 
-        public MonsterRepository(string jsonFile)
+        public async Task SetupRepo(string path, string backUpJsonFile)
         {
-            _monsters = JsonConvert.DeserializeObject<List<Monster>>(GetJsonString(jsonFile));
+            _monsters = await LoadJson(path, backUpJsonFile);
             GetUniqueTypes();
             GetUniqueElements();
         }
 
         private void GetUniqueTypes()
         {
-            foreach (Monster uniqueMonster in _monsters.DistinctBy(monster => monster.Type))
-                _types.Add(uniqueMonster.Type);
+            foreach (Monster uniqueMonster in _monsters.DistinctBy(monster => monster.Species))
+                _types.Add(uniqueMonster.Species);
         }
 
         private void GetUniqueElements()
@@ -67,6 +68,29 @@ namespace MonsterHunter.Repository
             using Stream? stream = assembly.GetManifestResourceStream(resourceName);
             using var reader = new StreamReader(stream);
             return reader.ReadToEnd();
+        }
+
+        private async Task<List<Monster>> LoadJson(string path, string backUpJsonFile)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                try
+                {
+                    var response = await client.GetAsync(path);
+
+                    if (!response.IsSuccessStatusCode)
+                        throw new HttpRequestException(response.ReasonPhrase);
+
+                    string json = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<List<Monster>>(json);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    return JsonConvert.DeserializeObject<List<Monster>>(GetJsonString(backUpJsonFile));
+                }
+            }
+
         }
     }
 }
